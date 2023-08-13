@@ -1,14 +1,7 @@
-import { createStore, combineReducers } from "redux";
-import { moneyReducer, cakeReducer, iceCreamReducer } from "./reducer.js";
+import { configureStore } from '@reduxjs/toolkit';
+import { rootReducer } from './reducers';
 
-// Combine the reducers
-const rootReducer = combineReducers({
-    money: moneyReducer,
-    cake: cakeReducer,
-    iceCream: iceCreamReducer,
+// the Redux store
+export const store = configureStore({
+    reducer: rootReducer,
 });
-
-// Redux store
-const store = createStore(rootReducer);
-
-export default store;

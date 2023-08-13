@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Redux Toolkit createSlice
+// Redux iceCream slice
 const iceCreamSlice = createSlice({
     name: 'iceCream',
     initialState: { iceCreams: 0 },

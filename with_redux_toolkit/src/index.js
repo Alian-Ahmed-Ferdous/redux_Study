@@ -1,11 +1,13 @@
-import { sellCake, restockCake, sellIceCream, restockIceCream } from "./action.js";
-import store from "./store.js";
+import { store } from '../app/store';
+import { sellCake, restockCake } from '../features/cake/cakeSlice';
+import { sellIceCream, restockIceCream } from '../features/ice cream/iceCreamSlice';
+import { selectMoney } from '../features/money/moneySlice';
 
 // Function to update the display
 function updateDisplay() {
     const state = store.getState();
 
-    document.getElementById('money').textContent = state.money.money;
+    document.getElementById('money').textContent = selectMoney(state);
     document.getElementById('cakes').textContent = state.cake.cakes;
     document.getElementById('iceCreams').textContent = state.iceCream.iceCreams;
 }
@@ -14,7 +16,7 @@ function updateDisplay() {
 function handleSellCake() {
     const cakes = store.getState().cake.cakes;
     if (cakes > 0) {
-        store.dispatch(sellCake());
+        store.dispatch(sellCake(1));
     } else {
         alert("No more cakes available!");
     }
@@ -22,9 +24,9 @@ function handleSellCake() {
 
 // Function to handle the restockCake button click
 function handleRestockCake() {
-    const money = store.getState().money.money;
+    const money = selectMoney(store.getState());
     if (money >= 5 * 3) {
-        store.dispatch(restockCake());
+        store.dispatch(restockCake(5));
     } else {
         alert("Not enough money available!");
     }
@@ -34,17 +36,17 @@ function handleRestockCake() {
 function handleSellIceCream() {
     const iceCreams = store.getState().iceCream.iceCreams;
     if (iceCreams > 0) {
-        store.dispatch(sellIceCream());
+        store.dispatch(sellIceCream(1));
     } else {
-        alert("No more iceCreams available!");
+        alert("No more ice creams available!");
     }
 }
 
 // Function to handle the restockIceCream button click
 function handleRestockIceCream() {
-    const money = store.getState().money.money;
-    if (money >= 5 * 3) {
-        store.dispatch(restockIceCream());
+    const money = selectMoney(store.getState());
+    if (money >= 5 * 2) {
+        store.dispatch(restockIceCream(5));
     } else {
         alert("Not enough money available!");
     }

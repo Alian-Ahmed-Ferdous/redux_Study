@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Redux Toolkit createSlice
+// Redux cake slice
 const cakeSlice = createSlice({
     name: 'cake',
     initialState: { cakes: 0 },
